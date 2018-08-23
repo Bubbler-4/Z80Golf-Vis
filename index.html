@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Z80Golf Visual Debugger</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <div class="col-md-7">
+      <h2>Z80Golf Visual Debugger</h2>
+      <textarea id="code" placeholder="Enter Z80Golf binary as simple hex (xxd -ps) here..." spellcheck="false" rows=2></textarea>
+      <textarea id="stdin" placeholder="Enter input (stdin) here..." spellcheck="false" rows=2></textarea>
+      <textarea id="stdout" placeholder="Output (stdout) appears here..." readonly rows=2></textarea>
+      <textarea id="debug" placeholder="Debug information appears here..." readonly rows=4></textarea>
+      <br />
+      <button onclick="z80reset()">Begin/Reset</button>
+      <button onclick="z80step()">Step</button>
+      <span id="status">Ready.</span>
+      <h3>Options</h3>
+      <b>Input method:</b>
+      <input type="radio" id="in-plain" name="in" checked />
+      <label for="in-plain">Plaintext</label>
+      <input type="radio" id="in-dec" name="in" />
+      <label for="in-dec">Decimal</label>
+      <input type="radio" id="in-hex" name="in" />
+      <label for="in-hex">Hexadecimal</label>
+      <br />
+      <b>Output method:</b>
+      <input type="radio" id="out-plain" name="out" checked />
+      <label for="out-plain">Plaintext</label>
+      <input type="radio" id="out-dec" name="out" />
+      <label for="out-dec">Decimal</label>
+      <input type="radio" id="out-hex" name="out" />
+      <label for="out-hex">Hexadecimal</label>
+      <h3>Notes</h3>
+      Latest version of Chrome or Firefox is recommended.<br />
+      For decimal/hexadecimal stdin, each value should be delimited by whitespace.
+      <h3>Planned Features</h3>
+      <ol>
+        <li>Support basic one-byte instructions.</li>
+        <li>Show debug information: registers, memory and disassembly.</li>
+        <li>Support prefixed instructions (IX/IY-related, bit-related, extra-op).</li>
+        <li>Support undocumented instructions based on <a href="http://www.z80.info/zip/z80-documented.pdf">this article</a>.</li>
+        <li>Support accurate flags and the R register (for random source).</li>
+        <li>Someday move to GitHub Pages and add support for permalink.</li>
+      </ol>
+    </div>
+
+  </body>
+</html>
