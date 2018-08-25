@@ -2,51 +2,6 @@ window.onload = function() {
       
   let hellowld = '2e0d3e48cd00807e23b720f876656c6c6f2c20776f726c6421'
 
-  Number.prototype.hex = function(digits) {
-    return this.toString(16).padStart(digits, 0)
-  }
-
-  // Ported from Z80Golf machine written in C.
-
-  class Z80Reg {
-    constructor() {
-      this.word = 0
-    }
-    get high() { return this.word >> 8 }
-    get low() { return this.word & 255 }
-    set high(val) {
-      this.word = ((val & 255) << 8) | (this.word & 255)
-    }
-    set low(val) {
-      this.word = (this.word & 0xff00) | (val & 255)
-    }
-  }
-
-  class Z80Golf {
-    constructor() {
-      this.memory = Array(65536)
-      this.running = false
-    }
-    init(code=[], stdin=[]) {
-      this.memory.fill(0)
-      this.reg = {
-        a: 0, f: 0, b: 0, c: 0, d: 0, e: 0, h: 0, l: 0,
-        pc: 0, sp: 0, ix: 0, iy: 0
-      }
-      this.shadow = {
-        a: 0, f: 0, b: 0, c: 0, d: 0, e: 0, h: 0, l: 0
-      }
-      code.forEach((v, i) => this.memory[i] = v, this)
-      this.stdin = stdin
-      this.stdout = []
-      this.running = true
-    }
-    step() {
-      if (this.stdout.length) this.running = false
-      else this.stdout.push(65)
-    }
-  }
-
   let z80golf = new Z80Golf()
 
   let codeElem = $('#code')
