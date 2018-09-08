@@ -24,7 +24,6 @@ class Z80Chip {
 		 '_af_', '_bc_', '_de_', '_hl_'].forEach(
 			reg => this[reg] = new Z80Reg(), this
     )
-    this.initInstr()
   }
   
   // Main 8-bit registers.
@@ -118,13 +117,6 @@ class Z80Chip {
   set flagV(val) { this.f = (this.f & ~(1 << 2)) | ((val & 1) << 2) }
   set flagN(val) { this.f = (this.f & ~(1 << 1)) | ((val & 1) << 1) }
   set flagC(val) { this.f = (this.f & ~(1 << 0)) | ((val & 1) << 0) }
-
-  // Z80 instructions.
-  
-  initInstr() {
-    this.instr = {}
-
-  }
 }
 
 class Z80Golf {
@@ -132,6 +124,7 @@ class Z80Golf {
     this.memory = Array(65536)
     this.chip = new Z80Chip()
 		this.running = false
+		this.instr = new Z80Instr().instr
   }
   
 	init(code = [], stdin = []) {
