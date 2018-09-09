@@ -6,7 +6,7 @@ class Z80Instr {
       pc = (pc + 1) & 0xffff
       instr = instr[opcode]
     }
-    return instr
+    return { instr: instr, pc: pc }
   }
 }
 

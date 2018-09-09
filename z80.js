@@ -116,7 +116,9 @@ class Z80Chip {
   set flagP(val) { this.f = (this.f & ~(1 << 2)) | ((val & 1) << 2) }
   set flagV(val) { this.f = (this.f & ~(1 << 2)) | ((val & 1) << 2) }
   set flagN(val) { this.f = (this.f & ~(1 << 1)) | ((val & 1) << 1) }
-  set flagC(val) { this.f = (this.f & ~(1 << 0)) | ((val & 1) << 0) }
+	set flagC(val) { this.f = (this.f & ~(1 << 0)) | ((val & 1) << 0) }
+	
+	nop() { }
 }
 
 class Z80Golf {
@@ -124,7 +126,6 @@ class Z80Golf {
     this.memory = Array(65536)
     this.chip = new Z80Chip()
 		this.running = false
-		this.instr = new Z80Instr().instr
   }
   
 	init(code = [], stdin = []) {
@@ -136,7 +137,9 @@ class Z80Golf {
   }
   
 	step() {
-		if (this.stdout.length) this.running = false
-		else this.stdout.push(65)
+		let {instr, pc} = Z80Instr.decode(this.memory, this.chip.pc)
+		this.chip.pc = pc
+		if (instr.op == 'halt') this.running = false
+		else this.chip[instr.op]()
 	}
 }
